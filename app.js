@@ -14,6 +14,20 @@ app.use(express.urlencoded({
 	extended: true
 }));
 
+// # Panggil db
+const db = require('./app/models/');
+db.mongoose.connect(db.url, {
+	useNewUrlParser: true,
+	useUnifiedTopology: true,
+})
+.then(() => {
+	console.info("Database Connected!");
+})
+.catch((error) => {
+	console.info('Cannot Connect to the Database!');
+	process.exit();
+});
+
 // # Create End Point / Routing
 app.get('/', (req, res) => {
 	res.status(200);
